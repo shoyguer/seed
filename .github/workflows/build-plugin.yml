@@ -1,7 +1,12 @@
-name: Build GDExtension Cross Platform Plugin
+name: Build Cross Platform Plugin
 on:
   workflow_dispatch:
     inputs:
+      version:
+        description: 'Version to release (e.g., 1.1, 2.0.1)'
+        required: true
+        type: string
+        default: '1.0'
       build_type:
         description: |
           Select build type:
@@ -12,7 +17,7 @@ on:
         options:
           - debug
           - full_plugin_compilation
-        default: debug
+        default: full_plugin_compilation
       precision:
         description: |
           Select float precision for floating-point calculations in the GDExtension:
@@ -53,7 +58,7 @@ on:
         default: false
 
 env:
-  PLUGIN_NAME: "plugin_name" # Replace with your plugin name (must match .gdextension file name)
+  PLUGIN_NAME: "stat_pool" # Replace with your plugin name (must match .gdextension file name)
 
 jobs:
   set-matrix:
@@ -255,6 +260,13 @@ jobs:
           if [ -f "test_project/${{ env.PLUGIN_NAME }}/${{ env.PLUGIN_NAME }}.gdextension" ]; then
             cp "test_project/${{ env.PLUGIN_NAME }}/${{ env.PLUGIN_NAME }}.gdextension" "${{ env.PLUGIN_NAME }}/${{ env.PLUGIN_NAME }}.gdextension"
           fi
+      
+      # Copy and rename plugin icon
+      - name: Copy and rename plugin icon
+        run: |
+          if [ -f "brand/source/editor_icon.svg" ]; then
+            cp "brand/source/editor_icon.svg" "${{ env.PLUGIN_NAME }}/stat_pool.svg"
+          fi
 
       # Copy LICENSE file if it exists
       - name: Copy LICENSE
@@ -275,6 +287,35 @@ jobs:
       - name: Upload final artifact
         uses: actions/upload-artifact@v4
         with:
-          name: "finished_unzip_me"
+          name: "Release File"
           path: "${{ env.PLUGIN_NAME }}.zip"
           retention-days: 1
+
+  release:
+    runs-on: ubuntu-22.04
+    needs: merge
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download release artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: "Release File"
+          path: ./
+
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Create the release with the specified tag and name
+          gh release create "${{ github.event.inputs.version }}" \
+            --title "v${{ github.event.inputs.version }} - Release" \
+            --notes "## Stat Pool v${{ github.event.inputs.version }}
+
+          ### Installation:
+          1. Download the \`${{ env.PLUGIN_NAME }}.zip\` file below
+          2. Extract it to your Godot project's \`addons\` directory" \
+            "${{ env.PLUGIN_NAME }}.zip"
