@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="Seed" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Seed generation utility class.
+	</brief_description>
+	<description>
+		An utility class that provides character type and seed type enumerations for random seed generation.
+		Works in conjunction with RNG systems to define what types of characters should be used when generating random seeds.
+	</description>
+	<tutorials>
+	</tutorials>
+	<constants>
+		<constant name="NUMBER" value="0" enum="CharType">
+			Numberic character type (0-9).
+		</constant>
+		<constant name="CAPITAL" value="1" enum="CharType">
+			Capital alphabet character type (A-Z).
+		</constant>
+		<constant name="LOWER" value="2" enum="CharType">
+			Lower alphabet character type (a-z).
+		</constant>
+		<constant name="NUMBERS" value="0" enum="SeedType">
+			Only numbers (0-9). Seed will contain only numeric characters.
+		</constant>
+		<constant name="CAPITAL_ONLY" value="1" enum="SeedType">
+			Only capital letters (A-Z). Seed will contain only uppercase alphabetic characters.
+		</constant>
+		<constant name="LOWER_ONLY" value="2" enum="SeedType">
+			Only lowercase letters (a-z). Seed will contain only lowercase alphabetic characters.
+		</constant>
+		<constant name="ALL_LETTERS" value="3" enum="SeedType">
+			Both capital and lowercase letters (A-Z, a-z). Seed will contain mixed case alphabetic characters.
+		</constant>
+		<constant name="ALL_MIXED" value="4" enum="SeedType">
+			Numbers, capital and lowercase letters mixed (0-9, A-Z, a-z). Seed will contain all character types.
+		</constant>
+	</constants>
+</class>
