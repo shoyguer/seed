@@ -9,6 +9,19 @@
 	</description>
 	<tutorials>
 	</tutorials>
+	<methods>
+		<method name="generate_seed_string" qualifiers="static">
+			<return type="String" />
+			<param index="0" name="seed_type" type="int" enum="Seed.SeedType" />
+			<param index="1" name="max_seed_length" type="int" />
+			<description>
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="rng_seed" type="String" setter="set_rng_seed" getter="get_rng_seed" default="&quot;&quot;">
+		</member>
+	</members>
 	<constants>
 		<constant name="NUMBER" value="0" enum="CharType">
 			Numberic character type (0-9).
