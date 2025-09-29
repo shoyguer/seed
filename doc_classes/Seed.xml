@@ -1,51 +1,64 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <class name="Seed" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
 	<brief_description>
-		Seed generation utility class.
+		Utility class for generating and managing random seeds and RNG instances.
 	</brief_description>
 	<description>
-		An utility class that provides character type and seed type enumerations for random seed generation.
-		Works in conjunction with RNG systems to define what types of characters should be used when generating random seeds.
+		[code]Seed[/code] is a utility class designed to facilitate the generation and management of random seeds and [RandomNumberGenerator] instances in Godot.
+		It provides methods to create random seed strings based on specified character types and lengths, generates new [RandomNumberGenerator] instances with hashed seeds, and hash seed strings for RNG configuration.
 	</description>
 	<tutorials>
 	</tutorials>
 	<methods>
+		<method name="generate_rng" qualifiers="static">
+			<return type="RandomNumberGenerator" />
+			<param index="0" name="new_seed" type="String" default="&quot;&quot;" />
+			<param index="1" name="seed_type" type="int" enum="Seed.SeedType" default="4" />
+			<param index="2" name="max_seed_length" type="int" default="12" />
+			<description>
+				Generates a new [RandomNumberGenerator] with a seed.
+				If [param new_seed] is empty, a new seed will be generated using [method generate_seed_string] with the specified [param seed_type] and [param max_seed_length].
+				If [param new_seed] is provided, it will be used directly as the seed.
+				The seed is then hashed and applied to a new [RandomNumberGenerator] instance using [method rng_hash_seed].
+			</description>
+		</method>
 		<method name="generate_seed_string" qualifiers="static">
 			<return type="String" />
-			<param index="0" name="seed_type" type="int" enum="Seed.SeedType" />
-			<param index="1" name="max_seed_length" type="int" />
+			<param index="0" name="seed_type" type="int" enum="Seed.SeedType" default="4" />
+			<param index="1" name="max_seed_length" type="int" default="12" />
 			<description>
+				Generates a random seed string based on the provided parameters.
+				[param seed_type] determines the type of characters to use in seed generation. Uses [enum SeedType] enum.
+				[param max_seed_length] sets the maximum number of characters in the generated seed.
+			</description>
+		</method>
+		<method name="rng_hash_seed" qualifiers="static">
+			<return type="RandomNumberGenerator" />
+			<param index="0" name="new_rng" type="RandomNumberGenerator" />
+			<param index="1" name="new_seed" type="String" />
+			<description>
+				Hashes the given seed string and applies it to the provided RandomNumberGenerator.
+				[param new_rng] is the RandomNumberGenerator instance to configure.
+				[param new_seed] is the seed string to hash and set. The string is hashed using Godot's built-in hash function before being applied.
+				Returns the configured RandomNumberGenerator instance.
 			</description>
 		</method>
 	</methods>
-	<members>
-		<member name="rng_seed" type="String" setter="set_rng_seed" getter="get_rng_seed" default="&quot;&quot;">
-		</member>
-	</members>
 	<constants>
-		<constant name="NUMBER" value="0" enum="CharType">
-			Numberic character type (0-9).
-		</constant>
-		<constant name="CAPITAL" value="1" enum="CharType">
-			Capital alphabet character type (A-Z).
-		</constant>
-		<constant name="LOWER" value="2" enum="CharType">
-			Lower alphabet character type (a-z).
-		</constant>
 		<constant name="NUMBERS" value="0" enum="SeedType">
-			Only numbers (0-9). Seed will contain only numeric characters.
+			Only numbers (0-9).
 		</constant>
 		<constant name="CAPITAL_ONLY" value="1" enum="SeedType">
-			Only capital letters (A-Z). Seed will contain only uppercase alphabetic characters.
+			Only capital letters (A-Z).
 		</constant>
 		<constant name="LOWER_ONLY" value="2" enum="SeedType">
-			Only lowercase letters (a-z). Seed will contain only lowercase alphabetic characters.
+			Only lowercase letters (a-z).
 		</constant>
 		<constant name="ALL_LETTERS" value="3" enum="SeedType">
-			Both capital and lowercase letters (A-Z, a-z). Seed will contain mixed case alphabetic characters.
+			Both capital and lowercase letters (A-Z, a-z).
 		</constant>
 		<constant name="ALL_MIXED" value="4" enum="SeedType">
-			Numbers, capital and lowercase letters mixed (0-9, A-Z, a-z). Seed will contain all character types.
+			Numbers, capital and lowercase letters mixed (0-9, A-Z, a-z).
 		</constant>
 	</constants>
 </class>
