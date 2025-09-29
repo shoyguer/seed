@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0mef8dev4xtd"]
+
+[ext_resource type="Script" uid="uid://5cj11sqtdtgk" path="res://scenes/ExampleCSharp/ExampleCSharp.cs" id="1_kqsav"]
+
+[node name="ExampleCSharp" type="Node2D"]
+script = ExtResource("1_kqsav")

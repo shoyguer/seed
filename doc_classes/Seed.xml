@@ -4,7 +4,7 @@
 		Utility class for generating and managing random seeds and RNG instances.
 	</brief_description>
 	<description>
-		[code]Seed[/code] is a utility class designed to facilitate the generation and management of random seeds and [RandomNumberGenerator] instances in Godot.
+		Seed is a utility class designed to facilitate the generation and management of random seeds and [RandomNumberGenerator] instances in Godot.
 		It provides methods to create random seed strings based on specified character types and lengths, generates new [RandomNumberGenerator] instances with hashed seeds, and hash seed strings for RNG configuration.
 	</description>
 	<tutorials>
@@ -19,7 +19,7 @@
 				Generates a new [RandomNumberGenerator] with a seed.
 				If [param new_seed] is empty, a new seed will be generated using [method generate_seed_string] with the specified [param seed_type] and [param max_seed_length].
 				If [param new_seed] is provided, it will be used directly as the seed.
-				The seed is then hashed and applied to a new [RandomNumberGenerator] instance using [method rng_hash_seed].
+				The seed is then hashed and applied to a new [RandomNumberGenerator] instance.
 			</description>
 		</method>
 		<method name="generate_seed_string" qualifiers="static">
@@ -30,17 +30,6 @@
 				Generates a random seed string based on the provided parameters.
 				[param seed_type] determines the type of characters to use in seed generation. Uses [enum SeedType] enum.
 				[param max_seed_length] sets the maximum number of characters in the generated seed.
-			</description>
-		</method>
-		<method name="rng_hash_seed" qualifiers="static">
-			<return type="RandomNumberGenerator" />
-			<param index="0" name="new_rng" type="RandomNumberGenerator" />
-			<param index="1" name="new_seed" type="String" />
-			<description>
-				Hashes the given seed string and applies it to the provided RandomNumberGenerator.
-				[param new_rng] is the RandomNumberGenerator instance to configure.
-				[param new_seed] is the seed string to hash and set. The string is hashed using Godot's built-in hash function before being applied.
-				Returns the configured RandomNumberGenerator instance.
 			</description>
 		</method>
 	</methods>

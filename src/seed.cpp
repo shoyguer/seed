@@ -104,9 +104,8 @@ String Seed::get_char(CharType type, Ref<RandomNumberGenerator> aux_rng)
 // Bindings
 void Seed::_bind_methods()
 {
-    ClassDB::bind_static_method("Seed", D_METHOD("generate_seed_string", "seed_type", "max_seed_length"), &Seed::generate_seed_string);
-    ClassDB::bind_static_method("Seed", D_METHOD("generate_rng", "new_seed", "seed_type", "max_seed_length"), &Seed::generate_rng);
-    ClassDB::bind_static_method("Seed", D_METHOD("rng_hash_seed", "new_rng", "new_seed"), &Seed::rng_hash_seed);
+    ClassDB::bind_static_method("Seed", D_METHOD("generate_seed_string", "seed_type", "max_seed_length"), &Seed::generate_seed_string, DEFVAL(ALL_MIXED), DEFVAL(12));
+    ClassDB::bind_static_method("Seed", D_METHOD("generate_rng", "new_seed", "seed_type", "max_seed_length"), &Seed::generate_rng, DEFVAL(""), DEFVAL(ALL_MIXED), DEFVAL(12));
 
     BIND_ENUM_CONSTANT(NUMBERS);
     BIND_ENUM_CONSTANT(CAPITAL_ONLY);

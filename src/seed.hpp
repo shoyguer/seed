@@ -24,11 +24,6 @@ public:
         SeedType seed_type = ALL_MIXED,
         int max_seed_length = 12
     );
-    static godot::Ref<godot::RandomNumberGenerator> rng_hash_seed
-    (
-        godot::Ref<godot::RandomNumberGenerator> new_rng,
-        const godot::String &new_seed
-    );
 
 protected:
     static void _bind_methods();
@@ -40,6 +35,11 @@ private:
         LOWER
     };
 
+    static godot::Ref<godot::RandomNumberGenerator> rng_hash_seed
+    (
+        godot::Ref<godot::RandomNumberGenerator> new_rng,
+        const godot::String &new_seed
+    );
     static godot::Array get_char_types(SeedType seed_type);
     static godot::String get_char(CharType type, godot::Ref<godot::RandomNumberGenerator> aux_rng);
 };
