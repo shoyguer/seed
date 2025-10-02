@@ -1,6 +1,8 @@
 # Seed
 A simple Random seed generation system for Godot games. Perfect for creating reproducible randomization, procedural generation, seeded world creation, or any scenario where you need consistent random number generation.
 
+![Header Image](https://raw.githubusercontent.com/shoyguer/seed/refs/heads/main/brand/header_image.png)
+
 ## Why Use Seed?
 Managing random number generation in games can be complex. And this plugin will provide you with:
 - Consistent, reproducible randomization
