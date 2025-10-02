@@ -265,7 +265,7 @@ jobs:
       - name: Copy and rename plugin icon
         run: |
           if [ -f "brand/source/editor_icon.svg" ]; then
-            cp "brand/source/editor_icon.svg" "addons/${{ env.PLUGIN_NAME }}/stat_pool.svg"
+            cp "brand/source/editor_icon.svg" "addons/${{ env.PLUGIN_NAME }}/${{ env.PLUGIN_NAME }}.svg"
           fi
 
       # Copy LICENSE file if it exists
