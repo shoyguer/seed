@@ -1,6 +1,7 @@
 #include "seed.hpp"
 #include "godot_cpp/core/class_db.hpp"
 #include "godot_cpp/variant/variant.hpp"
+#include "godot_cpp/classes/time.hpp"
 
 
 using namespace godot;
@@ -11,7 +12,45 @@ String Seed::generate_seed_string(SeedType seed_type, int max_seed_length)
 
     Ref<RandomNumberGenerator> aux_rng;
     aux_rng.instantiate();
-    aux_rng->randomize();
+    
+    // This section I decided to get the most random as possible for the aux_rng seed.
+    // It uses a combination of random numbers and the current date to create a unique seed.
+    // This way, even if the function is called multiple times in quick succession,
+    // the likelihood of generating the same seed is basically impossible.
+
+    // Prefix Random number to be hashed to the aux_rng seed
+    int prefix_random = aux_rng->randi_range(1000, 9999);
+    
+    // Get current date in YYYYMMDDHHMMSSms format
+    Dictionary datetime = Time::get_singleton()->get_datetime_dict_from_system();
+    int year = datetime["year"];
+    int month = datetime["month"];
+    int day = datetime["day"];
+    int hour = datetime["hour"];
+    int minute = datetime["minute"];
+    int second = datetime["second"];
+    
+    // Get milliseconds from current time
+    uint64_t current_time_ms = Time::get_singleton()->get_ticks_msec();
+    int millisecond = current_time_ms % 1000;
+    
+    String date_string = 
+        String::num_int64(year) + 
+        String::num_int64(month).pad_zeros(2) + 
+        String::num_int64(day).pad_zeros(2) +
+        String::num_int64(hour).pad_zeros(2) +
+        String::num_int64(minute).pad_zeros(2) +
+        String::num_int64(second).pad_zeros(2) +
+        String::num_int64(millisecond).pad_zeros(3);
+    
+    // Suffix Random number to be hashed to the aux_rng seed
+    int suffix_random = aux_rng->randi_range(1000, 9999);
+    
+    // Combine into final hash string
+    String hash_string = String::num_int64(prefix_random) + date_string + String::num_int64(suffix_random);
+    
+    // Hashes the string to set the aux_rng seed
+    aux_rng->set_seed(hash_string.hash());
     
     for (int i = 0; i < max_seed_length; i++) {
         Array char_types = get_char_types(seed_type);

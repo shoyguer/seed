@@ -1,15 +1,13 @@
 using Godot;
 
 /// <summary>
-/// Example script demonstating the Seed plugin
+/// Example script demonstrating the Seed plugin
 /// </summary>
 public partial class ExampleCSharp : Node2D
 {
 	public override void _Ready()
 	{
-		GD.Print("=== Seed Plugin Example ===");
-
-        // Try to access Seed class using ClassDB
+		// Try to access Seed class using ClassDB
 		var seed = ClassDB.Instantiate("Seed").AsGodotObject();
 		
 		if (seed == null)
@@ -33,14 +31,14 @@ public partial class ExampleCSharp : Node2D
 		GD.Print($"Auto seed RNG: {rng2.Call("randf")}");
 		
 		// Demonstrate reproducible randomization
-		GD.Print("Reproducible test:");
+		GD.Print("\n___\nReproducible test:");
 		string testSeed = "TestSeed123";
 		var rngA = seed.Call("generate_rng", testSeed).AsGodotObject();
 		var rngB = seed.Call("generate_rng", testSeed).AsGodotObject();
 		GD.Print($"Same seed, same results: {rngA.Call("randf").Equals(rngB.Call("randf"))}");
 		
 		// Simple procedural generation
-		GD.Print("Procedural world:");
+		GD.Print("\n___\nProcedural world:");
 		var worldRng = seed.Call("generate_rng", "WorldSeed").AsGodotObject();
 		string[] terrains = {"Mountain", "Forest", "Desert"};
 		for (int i = 0; i < 3; i++)
@@ -50,7 +48,7 @@ public partial class ExampleCSharp : Node2D
 			GD.Print($"  {terrain} (Size: {size})");
 		}
 		
-		GD.Print("=== Example Complete ===");
-		// GetTree().Quit();
+		// Close game
+		GetTree().Quit();
 	}
 }

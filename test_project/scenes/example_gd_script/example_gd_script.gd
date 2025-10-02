@@ -2,8 +2,6 @@ extends Node2D
 ## Example script demonstrating the Seed plugin
 
 func _ready() -> void:
-	print("=== Seed Plugin Example ===")
-	
 	# Generate different types of seed strings
 	print("Numbers only: ", Seed.generate_seed_string(Seed.NUMBERS, 8))
 	print("Letters only: ", Seed.generate_seed_string(Seed.ALL_LETTERS, 10))
@@ -19,19 +17,19 @@ func _ready() -> void:
 	print("Auto seed RNG: ", rng2.randf())
 	
 	# Demonstrate reproducible randomization
-	print("Reproducible test:")
+	print("\n___\nReproducible test:")
 	var test_seed = "TestSeed123"
 	var rng_a = Seed.generate_rng(test_seed)
 	var rng_b = Seed.generate_rng(test_seed)
 	print("Same seed, same results: ", rng_a.randf() == rng_b.randf())
 	
 	# Simple procedural generation
-	print("Procedural world:")
+	print("\n___\nProcedural world:")
 	var world_rng = Seed.generate_rng("WorldSeed")
 	for i in range(3):
 		var terrain = ["Mountain", "Forest", "Desert"][world_rng.randi_range(0, 2)]
 		var size = world_rng.randi_range(50, 200)
 		print("  %s (Size: %d)" % [terrain, size])
 	
-	print("=== Example Complete ===")
-	# get_tree().quit()
+	# Close game
+	get_tree().quit()
