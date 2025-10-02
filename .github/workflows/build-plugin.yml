@@ -281,14 +281,14 @@ jobs:
 
       # Create zip archive
       - name: Create zip archive
-        run: zip -r "${{ env.PLUGIN_NAME }}.zip" "addons"
+        run: zip -r "${{ env.PLUGIN_NAME }}_${{ github.event.inputs.version }}.zip" "addons"
 
       # Upload final artifact
       - name: Upload final artifact
         uses: actions/upload-artifact@v4
         with:
           name: "Release File"
-          path: "${{ env.PLUGIN_NAME }}.zip"
+          path: "${{ env.PLUGIN_NAME }}_${{ github.event.inputs.version }}.zip"
           retention-days: 1
 
   release:
@@ -316,6 +316,6 @@ jobs:
             --notes "## Stat Pool v${{ github.event.inputs.version }}
 
           ### Installation:
-          1. Download the \`${{ env.PLUGIN_NAME }}.zip\` file below
+          1. Download the \`${{ env.PLUGIN_NAME }}_${{ github.event.inputs.version }}.zip\` file below
           2. Extract it to your Godot project's root directory (the zip contains the \`addons\` folder structure)" \
-            "${{ env.PLUGIN_NAME }}.zip"
+            "${{ env.PLUGIN_NAME }}_${{ github.event.inputs.version }}.zip"
