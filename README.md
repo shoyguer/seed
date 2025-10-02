@@ -27,7 +27,7 @@ Follow [godot-plus-plus](https://github.com/nikoladevelops/godot-plus-plus/tree/
 
 ## Installation
 1. Download the latest release
-2. Extract to your Godot project, and make sure this is how your project structure looks like this:
+2. Extract to your Godot project, and make sure this is how your project structure looks:
 ```
 your_project_folder/
 ├── addons/
