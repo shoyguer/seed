@@ -313,7 +313,7 @@ jobs:
           # Create the release with the specified tag and name
           gh release create "${{ github.event.inputs.version }}" \
             --title "v${{ github.event.inputs.version }} - Release" \
-            --notes "## Stat Pool v${{ github.event.inputs.version }}
+            --notes "## Seed v${{ github.event.inputs.version }}
 
           ### Installation:
           1. Download the \`${{ env.PLUGIN_NAME }}_${{ github.event.inputs.version }}.zip\` file below
