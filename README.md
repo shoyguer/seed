@@ -45,12 +45,17 @@ Check the [Wiki](https://github.com/shoyguer/seed/wiki) for information on how t
 
 Or jump to whatever you need:
 
-#### Class reference
+#### Wiki
 - [Class Reference](https://github.com/shoyguer/seed/wiki/1.-Class-Reference)
+- [Code Examples](https://github.com/shoyguer/seed/wiki/2.1.-GDScript-Code-Example)
 
-#### Usage Examples
-- [GDScript](https://github.com/shoyguer/seed/wiki/2.1.-GDScript-Code-Example)
-- [C#](https://github.com/shoyguer/seed/wiki/2.2.-C%23-code-example)
+## Other Plugins
+Check out my other Godot plugins:
+
+| Plugin | Description |
+|--------|-------------|
+| [<img src="https://raw.githubusercontent.com/shoyguer/time-tick/refs/heads/main/brand/header_image.png" width="192">](https://github.com/shoyguer/time-tick) | Flexible time management & tick system |
+| [<img src="https://raw.githubusercontent.com/shoyguer/stat-pool/refs/heads/main/brand/header_image.png" width="192">](https://github.com/shoyguer/stat-pool) | Flexible stat management system (for Health, Mana, Stamina, money etc) |
 
 ## Support
 If this plugin helped you, please, consider:
