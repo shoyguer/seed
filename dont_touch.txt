@@ -1,3 +1,4 @@
 seed
-4.5
+4.6
+Seed
 D:\Software\Godot 4.5 Mono\Godot_v4.5-stable_mono_win64.exe

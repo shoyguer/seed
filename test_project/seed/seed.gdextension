@@ -1,6 +1,6 @@
 [configuration]
 entry_symbol = "seed_init"
-compatibility_minimum = "4.5"
+compatibility_minimum = "4.6"
 
 [icons]
 Seed = "./seed.svg"
